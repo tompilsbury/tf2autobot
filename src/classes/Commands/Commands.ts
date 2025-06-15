@@ -93,6 +93,45 @@ export default class Commands {
 
     async processMessage(steamID: SteamID, message: string): Promise<void> {
         const prefix = this.bot.getPrefix(steamID);
+
+        // ADDED BY SIGSBY - Handle easy copy paste commandsAdd commentMore actions
+        //
+        //
+        function titleCase(str) {
+            var splitStr = str.toLowerCase().split(' ');
+            for (var i = 0; i < splitStr.length; i++) {
+                // You do not need to check if i is larger than splitStr length, as your for does that for you
+                // Assign it back to the array
+                splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+            }
+            // Directly return the joined string
+            return splitStr.join(' ');
+        }
+
+        if (message.startsWith('sell_') || message.startsWith('buy_')) {
+            message = message
+                .replace('Non_Craftable', 'Non-Craftable')
+                .replace('non_craftable', 'non-craftable')
+                .replace('72', "'72")
+                .replace('Nuts_n_Bolts', "Nuts n' Bolts")
+                .replace('Kill_a_Watt', 'Kill-a-Watt')
+                .replace('Terror_Watt', 'Terror-Watt')
+                .replace('Squash_n_Twist', "Squash n' Twist")
+                .replace('Mann_Co__', 'Mann Co.')
+                .replace('B_M_O_C_', 'B.M.O.C.')
+                .replace('Taunt_The_Scaredy_cat_', 'Taunt: The Scaredy-cat!')
+                .replace('Taunt_Cheers_', 'Taunt: Cheers!');
+        }
+
+        if (message.startsWith('sell_')) {
+            var message = '!' + titleCase(message.replace('sell_', 'sell ').replace(/_/g, ' '));
+        } else if (message.startsWith('buy_')) {
+            var message = '!' + titleCase(message.replace('buy_', 'buy ').replace(/_/g, ' '));
+        }
+        //
+        //
+        // ADDED BY SIGSBY - Handle easy copy paste commands
+
         const command = CommandParser.getCommand(message.toLowerCase(), prefix);
         const isAdmin = this.bot.isAdmin(steamID);
         const isWhitelisted = this.bot.isWhitelisted(steamID);
