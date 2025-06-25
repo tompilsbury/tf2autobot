@@ -1,5 +1,7 @@
 # TF2Autobot
 
+**This fork adds an easy copy-paste command to the bot. You can add the command to the bp.tf listing text with the %easyCopyPaste% variable in options.json.**
+
 <div align="center"><a href="https://autobot.tf/"><img src="https://user-images.githubusercontent.com/47635037/100915844-e05e7380-350f-11eb-96f1-6d61141c4a44.png" alt="TF2Autobot" style="display: block; margin-left: auto; margin-right: auto;"></a></div>
 
 
